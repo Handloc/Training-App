@@ -1,10 +1,10 @@
+import AuthFormField from "./AuthFormField";
+
 const AuthForm: React.FC<{}> = () => {
   return (
     <form>
-      <label htmlFor="e-mail">E-mail</label>
-      <input type="text" id="e-mail" />
-      <label htmlFor="password">Password</label>
-      <input type="password" id="password" />
+      <AuthFormField field_name="e-mail" type="text" />
+      <AuthFormField field_name="password" type="password" />
       <button>Sign in</button>
     </form>
   );

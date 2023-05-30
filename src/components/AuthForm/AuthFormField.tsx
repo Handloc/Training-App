@@ -4,8 +4,10 @@ const AuthFormField: React.FC<{ field_name: string; type: string }> = ({
   field_name,
   type,
 }) => {
-  const form = useForm();
-  const { register } = form;
+  const {
+    register,
+    formState: { errors },
+  } = useForm();
 
   return (
     <div>
@@ -16,6 +18,7 @@ const AuthFormField: React.FC<{ field_name: string; type: string }> = ({
           required: { value: true, message: `${field_name} field is required` },
         })}
       />
+      <p>{errors.field_name?.message?.toString()}</p>
     </div>
   );
 };

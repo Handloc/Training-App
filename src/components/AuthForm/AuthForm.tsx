@@ -46,7 +46,7 @@ const AuthForm: React.FC<{}> = () => {
         {accountExists ? "Sign in into existing account" : "Create new account"}
       </p>
       <button className="mt-4 border-cyan-600 border-2 pl-4 pr-4">
-        Sign in
+        {accountExists ? "Sign up " : "Sign in"}
       </button>
     </form>
   );

@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import AuthFormField from "./AuthFormField";
+import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 
 const AuthForm: React.FC<{}> = () => {
   const {
@@ -11,6 +13,8 @@ const AuthForm: React.FC<{}> = () => {
   const HandlerSubmit = (e: any) => {
     console.log(e);
   };
+
+  const [accountExists, setaccountExists] = useState(false);
 
   return (
     <form
@@ -29,6 +33,18 @@ const AuthForm: React.FC<{}> = () => {
         register={register}
         errors={errors}
       />
+
+      {accountExists && (
+        <AuthFormField
+          field_name="Confirm password"
+          type="password"
+          register={register}
+          errors={errors}
+        />
+      )}
+      <p onClick={() => setaccountExists(!accountExists)}>
+        {accountExists ? "Sign in into existing account" : "Create new account"}
+      </p>
       <button className="mt-4 border-cyan-600 border-2 pl-4 pr-4">
         Sign in
       </button>

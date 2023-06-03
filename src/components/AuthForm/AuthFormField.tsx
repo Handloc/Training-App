@@ -15,7 +15,6 @@ const AuthFormField: React.FC<{
 
   return (
     <div className="flex flex-col">
-      {/* <label htmlFor={field_name}>{field_name}</label> */}
       <input
         type={type}
         className="border-b-2 border-cyan-600"

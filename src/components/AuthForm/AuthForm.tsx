@@ -23,7 +23,6 @@ const AuthForm: React.FC = () => {
   });
 
   const HandlerSubmit = (e: FormValues) => {
-    console.log(e);
     reset();
   };
 
@@ -40,6 +39,13 @@ const AuthForm: React.FC = () => {
         type="text"
         register={register}
         errors={errors}
+        validation_conditions={{
+          email: {
+            condition: (value) =>
+              /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(value),
+            errorMessage: "Invalid email adress",
+          },
+        }}
       />
       <AuthFormField
         field_name="Password"
@@ -47,6 +53,14 @@ const AuthForm: React.FC = () => {
         type="password"
         register={register}
         errors={errors}
+        validation_conditions={{
+          password: {
+            condition: (value) =>
+              /^(?=.*[A-Z])(?=.*[\W_])(?=.{8,})/.test(value),
+            errorMessage:
+              "Password must contains at least one uppercase letter, at least one special character and be at least 8 characters long",
+          },
+        }}
       />
 
       {accountExists && (
@@ -56,6 +70,12 @@ const AuthForm: React.FC = () => {
           type="password"
           register={register}
           errors={errors}
+          validation_conditions={{
+            password_2: {
+              condition: (value, formValues) => value === formValues.password,
+              errorMessage: "Passwords does not match",
+            },
+          }}
         />
       )}
       <p

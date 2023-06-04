@@ -5,11 +5,14 @@ import {
   FieldError,
 } from "react-hook-form";
 
+import { FormValues } from "./AuthForm";
+export type FieldType = "email" | "password" | "password_2";
+
 const AuthFormField: React.FC<{
   field_name: string;
   type: string;
-  id: string;
-  register: UseFormRegister<FieldValues>;
+  id: FieldType;
+  register: UseFormRegister<FormValues>;
   errors: DeepMap<FieldValues, FieldError>;
 }> = ({ field_name, type, register, errors, id }) => {
   return (

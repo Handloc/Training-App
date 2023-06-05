@@ -26,7 +26,7 @@ const AuthForm: React.FC = () => {
     reset();
   };
 
-  const [accountExists, setaccountExists] = useState(false);
+  const [registerAccount, setRegisterAccount] = useState(false);
 
   return (
     <form
@@ -63,7 +63,7 @@ const AuthForm: React.FC = () => {
         }}
       />
 
-      {accountExists && (
+      {registerAccount && (
         <AuthFormField
           field_name="Confirm password"
           id="password_2"
@@ -80,15 +80,17 @@ const AuthForm: React.FC = () => {
       )}
       <p
         onClick={() => {
-          setaccountExists(!accountExists);
+          setRegisterAccount(!registerAccount);
           reset();
         }}
-        className="text-zinc-300 hover:text-white transition-all cursor-pointer"
+        className="text-zinc-400 hover:text-white transition-all cursor-pointer"
       >
-        {accountExists ? "Sign in into existing account" : "Create new account"}
+        {registerAccount
+          ? "Sign in into existing account"
+          : "Create new account"}
       </p>
       <button className="bg-amber-400 hover:bg-fuchsia-600 text-black font-bold mt-4 p-2 pl-8 pr-8 rounded-3xl transition-all">
-        {accountExists ? "Sign up " : "Sign in"}
+        {registerAccount ? "Sign up " : "Sign in"}
       </button>
     </form>
   );

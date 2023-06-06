@@ -36,7 +36,7 @@ const AuthFormField: React.FC<{
         {...register(id, {
           required: {
             value: true,
-            message: `${field_name} field cannot be empty`,
+            message: `"${field_name}" field cannot be empty`,
           },
           validate: condition,
         })}

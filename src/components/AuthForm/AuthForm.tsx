@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import AuthFormField from "./AuthFormField";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { usersActions } from "../../store/users-slice";
 
 export type FormValues = {
   email: string;
@@ -22,8 +24,13 @@ const AuthForm: React.FC = () => {
     },
   });
 
-  const HandlerSubmit = (e: FormValues) => {
-    reset();
+  const dispatch = useDispatch();
+
+  const HandlerSubmit = async (formData: FormValues) => {
+    if (registerAccount) {
+      dispatch(usersActions.addUser(formData));
+      reset();
+    }
   };
 
   const [registerAccount, setRegisterAccount] = useState(false);

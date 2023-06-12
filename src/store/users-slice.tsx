@@ -1,29 +1,36 @@
-import { createSlice, configureStore, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface User {
   email: string;
   password: string;
 }
 
+interface AuthResponse {
+  user: User;
+}
+
 const initialUsersState: { users: User[] } = {
   users: [],
 };
 
+export const addUser = createAsyncThunk("users/addUser", async (user: User) => {
+  const res = await fetch("api/auth", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  });
+  const data: AuthResponse = await res.json();
+  return data.user;
+});
+
 const usersSlice = createSlice({
   name: "users",
   initialState: initialUsersState,
-  reducers: {
-    addUser: (state, action: PayloadAction<User>) => {
-      const sendData = async () => {
-        const res = await fetch("api/auth", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(action.payload),
-        });
-        const user_json: User = await res.json();
-        state.users.push(user_json);
-      };
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(addUser.fulfilled, (state, action) => {
+      state.users.push(action.payload);
+    });
   },
 });
 

@@ -2,8 +2,10 @@ import { useForm } from "react-hook-form";
 import AuthFormField from "./AuthFormField";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { usersActions } from "../../store/users-slice";
+// import { usersActions } from "../../store/users-slice";
 import { RootState } from "../../store";
+import { ThunkDispatch } from "redux-thunk";
+import { addUser } from "../../store/users-slice";
 
 export type FormValues = {
   email: string;
@@ -25,13 +27,13 @@ const AuthForm: React.FC = () => {
     },
   });
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<ThunkDispatch<RootState, undefined, any>>();
 
   const usersList = useSelector((state: RootState) => state.users);
 
   const HandlerSubmit = async (formData: FormValues) => {
     if (registerAccount) {
-      dispatch(usersActions.addUser(formData));
+      dispatch(addUser(formData));
       reset();
     }
   };

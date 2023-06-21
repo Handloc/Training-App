@@ -3,10 +3,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 interface User {
   email: string;
   password: string;
+  password_2: string;
 }
 
 interface AuthResponse {
-  user: User;
+  users: User;
 }
 
 const initialUsersState: { users: User[] } = {
@@ -20,7 +21,8 @@ export const addUser = createAsyncThunk("users/addUser", async (user: User) => {
     body: JSON.stringify(user),
   });
   const data: AuthResponse = await res.json();
-  return data.user;
+  console.log(data.users);
+  return data.users;
 });
 
 const usersSlice = createSlice({

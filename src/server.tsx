@@ -2,7 +2,7 @@ import { createServer, Model } from "miragejs";
 
 createServer({
   models: {
-    user: Model,
+    users: Model,
   },
 
   routes() {

@@ -21,7 +21,6 @@ export const addUser = createAsyncThunk("users/addUser", async (user: User) => {
     body: JSON.stringify(user),
   });
   const data: AuthResponse = await res.json();
-  console.log(data.users);
   return data.users;
 });
 

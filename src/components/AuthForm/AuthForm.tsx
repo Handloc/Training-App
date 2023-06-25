@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import AuthFormField from "./AuthFormField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { ThunkDispatch } from "redux-thunk";
@@ -27,19 +27,25 @@ const AuthForm: React.FC = () => {
     },
   });
 
+  let emailInDatabase = false;
   const dispatch = useDispatch<ThunkDispatch<RootState, undefined, any>>();
-
-  const usersList = useSelector((state: RootState) => state.users);
+  const usersList = useSelector((state: RootState) => state.users.users);
+  const [registerAccount, setRegisterAccount] = useState(false);
 
   const HandlerSubmit = async (formData: FormValues) => {
-    if (registerAccount) {
+    usersList.map((user) => {
+      if (formData.email === user.email) {
+        emailInDatabase = true;
+      }
+    });
+
+    if (registerAccount && !emailInDatabase) {
       dispatch(addUser(formData));
       dispatch(authActions.login());
+      emailInDatabase = false;
       reset();
     }
   };
-
-  const [registerAccount, setRegisterAccount] = useState(false);
 
   return (
     <form

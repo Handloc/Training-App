@@ -31,11 +31,13 @@ const AuthForm: React.FC = () => {
   const dispatch = useDispatch<ThunkDispatch<RootState, undefined, any>>();
   const usersList = useSelector((state: RootState) => state.users.users);
   const [registerAccount, setRegisterAccount] = useState(false);
+  const [emailTaken, setEmailTaken] = useState(false);
 
   const HandlerSubmit = async (formData: FormValues) => {
     usersList.map((user) => {
       if (formData.email === user.email) {
         emailInDatabase = true;
+        setEmailTaken(true);
       }
     });
 
@@ -43,6 +45,7 @@ const AuthForm: React.FC = () => {
       dispatch(addUser(formData));
       dispatch(authActions.login());
       emailInDatabase = false;
+      setEmailTaken(false);
       reset();
     }
   };
@@ -66,6 +69,7 @@ const AuthForm: React.FC = () => {
           },
         }}
       />
+
       <AuthFormField
         field_name="Password"
         id="password"
@@ -100,6 +104,7 @@ const AuthForm: React.FC = () => {
       <p
         onClick={() => {
           setRegisterAccount(!registerAccount);
+          setEmailTaken(false);
           reset();
         }}
         className="text-zinc-400 hover:text-white transition-all cursor-pointer"
@@ -108,9 +113,13 @@ const AuthForm: React.FC = () => {
           ? "Sign in into existing account"
           : "Create new account"}
       </p>
+
       <button className="bg-amber-400 hover:bg-fuchsia-600 text-black font-bold mt-4 p-2 pl-8 pr-8 rounded-3xl transition-all">
         {registerAccount ? "Sign up " : "Sign in"}
       </button>
+      <p className="text-red-600 mt-5">
+        {registerAccount && emailTaken && "E-mail address is already taken"}
+      </p>
     </form>
   );
 };

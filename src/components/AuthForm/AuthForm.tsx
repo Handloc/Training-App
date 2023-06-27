@@ -28,6 +28,7 @@ const AuthForm: React.FC = () => {
   });
 
   let emailInDatabase = false;
+  let targetPassword = "";
   const dispatch = useDispatch<ThunkDispatch<RootState, undefined, any>>();
   const usersList = useSelector((state: RootState) => state.users.users);
   const [registerAccount, setRegisterAccount] = useState(false);
@@ -37,6 +38,7 @@ const AuthForm: React.FC = () => {
     usersList.map((user) => {
       if (formData.email === user.email) {
         emailInDatabase = true;
+        targetPassword = user.password;
       }
     });
 
@@ -45,11 +47,18 @@ const AuthForm: React.FC = () => {
       dispatch(authActions.login());
       emailInDatabase = false;
       setAccountError("");
+      targetPassword = "";
       reset();
     } else if (registerAccount && emailInDatabase) {
       setAccountError("E-mail address is already taken!");
     } else if (!registerAccount && !emailInDatabase) {
       setAccountError("E-mail does not exists");
+    } else if (!registerAccount && emailInDatabase) {
+      if (formData.password === targetPassword) {
+        console.log("Logged in successfuly");
+      } else {
+        setAccountError("Password is incorrect");
+      }
     }
   };
 

@@ -55,7 +55,7 @@ const AuthForm: React.FC = () => {
       setAccountError("E-mail does not exists");
     } else if (!registerAccount && emailInDatabase) {
       if (formData.password === targetPassword) {
-        console.log("Logged in successfuly");
+        dispatch(authActions.login());
       } else {
         setAccountError("Password is incorrect");
       }

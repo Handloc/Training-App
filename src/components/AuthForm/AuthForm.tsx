@@ -6,6 +6,7 @@ import { RootState } from "../../store";
 import { ThunkDispatch } from "redux-thunk";
 import { addUser } from "../../store/users-slice";
 import { authActions } from "../../store/auth-slice";
+import { useNavigate } from "react-router-dom";
 
 export type FormValues = {
   email: string;
@@ -33,6 +34,7 @@ const AuthForm: React.FC = () => {
   const usersList = useSelector((state: RootState) => state.users.users);
   const [registerAccount, setRegisterAccount] = useState(false);
   const [accountError, setAccountError] = useState("");
+  const navigate = useNavigate();
 
   const HandlerSubmit = async (formData: FormValues) => {
     usersList.map((user) => {
@@ -58,6 +60,7 @@ const AuthForm: React.FC = () => {
         dispatch(authActions.login());
         setAccountError("");
         reset();
+        navigate("/home");
       } else {
         setAccountError("Password is incorrect");
       }

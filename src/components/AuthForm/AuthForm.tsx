@@ -44,7 +44,7 @@ const AuthForm: React.FC = () => {
 
     if (registerAccount && !emailInDatabase) {
       dispatch(addUser(formData));
-      dispatch(authActions.login());
+      setRegisterAccount(false);
       emailInDatabase = false;
       setAccountError("");
       targetPassword = "";

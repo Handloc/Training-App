@@ -56,6 +56,8 @@ const AuthForm: React.FC = () => {
     } else if (!registerAccount && emailInDatabase) {
       if (formData.password === targetPassword) {
         dispatch(authActions.login());
+        setAccountError("");
+        reset();
       } else {
         setAccountError("Password is incorrect");
       }

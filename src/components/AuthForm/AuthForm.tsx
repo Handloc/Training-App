@@ -37,7 +37,7 @@ const AuthForm: React.FC = () => {
   const navigate = useNavigate();
 
   const HandlerSubmit = async (formData: FormValues) => {
-    usersList.map((user) => {
+    usersList.forEach((user) => {
       if (formData.email === user.email) {
         emailInDatabase = true;
         targetPassword = user.password;

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import AuthFormField from "./AuthFormField";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { ThunkDispatch } from "redux-thunk";

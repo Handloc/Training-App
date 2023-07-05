@@ -1,11 +1,14 @@
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth-slice";
+import { useNavigate } from "react-router-dom";
 
 const Header: React.FC<{}> = () => {
   const dispatch = useDispatch<any>();
+  const navigate = useNavigate();
 
   const logoutHandler = () => {
     dispatch(authActions.logout());
+    navigate("/");
   };
 
   return (

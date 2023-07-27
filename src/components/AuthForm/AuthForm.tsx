@@ -36,6 +36,24 @@ const AuthForm: React.FC = () => {
   const [accountError, setAccountError] = useState("");
   const navigate = useNavigate();
 
+  const sendData = (userData: any) => {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    };
+
+    fetch("http://localhost:3000/api/auth", requestOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  };
+
   const HandlerSubmit = async (formData: FormValues) => {
     usersList.forEach((user) => {
       if (formData.email === user.email) {
@@ -69,7 +87,7 @@ const AuthForm: React.FC = () => {
 
   return (
     <form
-      onSubmit={handleSubmit(HandlerSubmit)}
+      onSubmit={handleSubmit(sendData)}
       className="flex flex-col w-4/5 sm:w-3/5 md:w-2/5 lg:w-1/5 m-auto mt-40 items-center border-2 border-zinc-500 shadow-xl rounded-3xl p-5 bg-zinc-600 text-white"
     >
       <AuthFormField

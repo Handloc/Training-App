@@ -28,6 +28,7 @@ const AuthForm: React.FC = () => {
     },
   });
 
+  let data: [];
   let emailInDatabase = false;
   let targetPassword = "";
   const dispatch = useDispatch<ThunkDispatch<RootState, undefined, any>>();
@@ -51,6 +52,16 @@ const AuthForm: React.FC = () => {
       })
       .catch((error) => {
         console.error("Error: ", error);
+      });
+  };
+
+  const getData = () => {
+    fetch("http://localhost:3000/api/auth")
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseData) => {
+        data = responseData;
       });
   };
 

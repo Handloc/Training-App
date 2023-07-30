@@ -31,7 +31,6 @@ const AuthForm: React.FC = () => {
   let emailInDatabase = false;
   let targetPassword = "";
   const dispatch = useDispatch<ThunkDispatch<RootState, undefined, any>>();
-  const usersList = useSelector((state: RootState) => state.users.users);
   const [registerAccount, setRegisterAccount] = useState(false);
   const [accountError, setAccountError] = useState("");
   const navigate = useNavigate();
@@ -96,37 +95,6 @@ const AuthForm: React.FC = () => {
     sendData(userData);
     getData(userData);
   };
-
-  // const HandlerSubmit = async (formData: FormValues) => {
-  //   usersList.forEach((user) => {
-  // if (formData.email === user.email) {
-  //   emailInDatabase = true;
-  //   targetPassword = user.password;
-  // }
-  //   });
-
-  // if (registerAccount && !emailInDatabase) {
-  //   dispatch(addUser(formData));
-  //   setRegisterAccount(false);
-  //   emailInDatabase = false;
-  //   setAccountError("");
-  //   targetPassword = "";
-  //   reset();
-  // } else if (registerAccount && emailInDatabase) {
-  //   setAccountError("E-mail address is already taken!");
-  // } else if (!registerAccount && !emailInDatabase) {
-  //   setAccountError("E-mail does not exists");
-  // } else if (!registerAccount && emailInDatabase) {
-  //   if (formData.password === targetPassword) {
-  //     dispatch(authActions.login(formData.email));
-  //     setAccountError("");
-  //     reset();
-  //     navigate("/home");
-  //   } else {
-  //     setAccountError("Password is incorrect");
-  //   }
-  // }
-  // };
 
   return (
     <form

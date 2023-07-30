@@ -28,7 +28,6 @@ const AuthForm: React.FC = () => {
     },
   });
 
-  let data: [];
   let emailInDatabase = false;
   let targetPassword = "";
   const dispatch = useDispatch<ThunkDispatch<RootState, undefined, any>>();
@@ -37,7 +36,7 @@ const AuthForm: React.FC = () => {
   const [accountError, setAccountError] = useState("");
   const navigate = useNavigate();
 
-  const sendData = (userData: any) => {
+  const sendData = (userData: FormValues) => {
     const requestOptions = {
       method: "POST",
       headers: {
@@ -55,50 +54,83 @@ const AuthForm: React.FC = () => {
       });
   };
 
-  const getData = () => {
+  const getData = (userData: FormValues) => {
+    let data: [];
     fetch("http://localhost:3000/api/auth")
       .then((response) => {
         return response.json();
       })
       .then((responseData) => {
-        data = responseData;
+        data = responseData.users;
+        data.forEach((user: FormValues) => {
+          if (userData.email === user.email) {
+            emailInDatabase = true;
+            targetPassword = user.password;
+          }
+        });
+        if (registerAccount && !emailInDatabase) {
+          dispatch(addUser(userData));
+          setRegisterAccount(false);
+          emailInDatabase = false;
+          setAccountError("");
+          targetPassword = "";
+          reset();
+        } else if (registerAccount && emailInDatabase) {
+          setAccountError("E-mail address is already taken");
+        } else if (!registerAccount && !emailInDatabase) {
+          setAccountError("E-mail does not exists");
+        } else if (!registerAccount && emailInDatabase) {
+          if (userData.password === targetPassword) {
+            dispatch(authActions.login(userData.email));
+            setAccountError("");
+            reset();
+            navigate("/home");
+          } else {
+            setAccountError("Password is incorrect");
+          }
+        }
       });
   };
 
-  const HandlerSubmit = async (formData: FormValues) => {
-    usersList.forEach((user) => {
-      if (formData.email === user.email) {
-        emailInDatabase = true;
-        targetPassword = user.password;
-      }
-    });
-
-    if (registerAccount && !emailInDatabase) {
-      dispatch(addUser(formData));
-      setRegisterAccount(false);
-      emailInDatabase = false;
-      setAccountError("");
-      targetPassword = "";
-      reset();
-    } else if (registerAccount && emailInDatabase) {
-      setAccountError("E-mail address is already taken!");
-    } else if (!registerAccount && !emailInDatabase) {
-      setAccountError("E-mail does not exists");
-    } else if (!registerAccount && emailInDatabase) {
-      if (formData.password === targetPassword) {
-        dispatch(authActions.login(formData.email));
-        setAccountError("");
-        reset();
-        navigate("/home");
-      } else {
-        setAccountError("Password is incorrect");
-      }
-    }
+  const SubmitHandler = (userData: FormValues) => {
+    sendData(userData);
+    getData(userData);
   };
+
+  // const HandlerSubmit = async (formData: FormValues) => {
+  //   usersList.forEach((user) => {
+  // if (formData.email === user.email) {
+  //   emailInDatabase = true;
+  //   targetPassword = user.password;
+  // }
+  //   });
+
+  // if (registerAccount && !emailInDatabase) {
+  //   dispatch(addUser(formData));
+  //   setRegisterAccount(false);
+  //   emailInDatabase = false;
+  //   setAccountError("");
+  //   targetPassword = "";
+  //   reset();
+  // } else if (registerAccount && emailInDatabase) {
+  //   setAccountError("E-mail address is already taken!");
+  // } else if (!registerAccount && !emailInDatabase) {
+  //   setAccountError("E-mail does not exists");
+  // } else if (!registerAccount && emailInDatabase) {
+  //   if (formData.password === targetPassword) {
+  //     dispatch(authActions.login(formData.email));
+  //     setAccountError("");
+  //     reset();
+  //     navigate("/home");
+  //   } else {
+  //     setAccountError("Password is incorrect");
+  //   }
+  // }
+  // };
 
   return (
     <form
-      onSubmit={handleSubmit(sendData)}
+      onSubmit={handleSubmit(SubmitHandler)}
       className="flex flex-col w-4/5 sm:w-3/5 md:w-2/5 lg:w-1/5 m-auto mt-40 items-center border-2 border-zinc-500 shadow-xl rounded-3xl p-5 bg-zinc-600 text-white"
     >
       <AuthFormField

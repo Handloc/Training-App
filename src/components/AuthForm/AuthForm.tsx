@@ -92,8 +92,12 @@ const AuthForm: React.FC = () => {
   };
 
   const SubmitHandler = (userData: FormValues) => {
-    sendData(userData);
-    getData(userData);
+    if (registerAccount) {
+      getData(userData);
+      sendData(userData);
+    } else {
+      getData(userData);
+    }
   };
 
   return (

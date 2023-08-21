@@ -103,7 +103,7 @@ const AuthForm: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit(SubmitHandler)}
-      className="flex flex-col w-4/5 sm:w-3/5 md:w-2/5 lg:w-1/5 m-auto mt-40 items-center border-2 border-zinc-500 shadow-xl rounded-3xl p-5 bg-zinc-600 text-white"
+      className="flex flex-col w-4/5 sm:w-3/5 md:w-2/5 lg:w-1/5 absolute top-40 left-0 right-0 m-auto items-center border-2 border-zinc-500 shadow-xl rounded-md p-5 bg-[#2e3642] text-white"
     >
       <AuthFormField
         field_name="E-mail"
@@ -164,12 +164,12 @@ const AuthForm: React.FC = () => {
           : "Create new account"}
       </p>
 
-      <button className="bg-amber-400 hover:bg-fuchsia-600 text-black font-bold mt-4 p-2 pl-8 pr-8 rounded-3xl transition-all">
+      <button className="bg-[#F05454] hover:bg-[#30475E] hover:shadow-md text-white  mt-4 p-2 pl-8 pr-8 rounded-md transition-all duration-200">
         {registerAccount ? "Sign up " : "Sign in"}
       </button>
       {accountError && (
-        <div className="mt-3 bg-red-300 p-2 border-2 border-red-600 rounded-xl">
-          <p className="text-red-600 font-bold">{accountError}</p>
+        <div className="mt-3 bg-red-200 p-2 border-2  shadow-red-500 border-red-600 rounded-md">
+          <p className="text-red-600 font-[500]">{accountError}</p>
         </div>
       )}
     </form>

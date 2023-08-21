@@ -7,15 +7,16 @@ const HomePage: React.FC<{}> = () => {
     (state: RootState) => state.auth.isAuthenticated
   );
 
-  if (isAuthenticated) {
-    return <Header />;
-  } else {
-    return (
-      <p className="flex text-center items-center justify-center m-auto mt-80 w-4/5 text-red-600 text-2xl font-bold">
-        ERROR: User is not logged in!
-      </p>
-    );
-  }
+  // if (isAuthenticated) {
+  //   return <Header />;
+  // } else {
+  //   return (
+  //     <p className="flex text-center items-center justify-center m-auto mt-80 w-4/5 text-red-600 text-2xl font-bold">
+  //       ERROR: User is not logged in!
+  //     </p>
+  //   );
+  // }
+  return <Header />;
 };
 
 export default HomePage;

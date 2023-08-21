@@ -1,33 +1,41 @@
-import { useDispatch } from "react-redux";
-import { authActions } from "../../store/auth-slice";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { useState } from "react";
+import Menu from "../Menu/Menu";
 
 const Header: React.FC<{}> = () => {
-  const dispatch = useDispatch<any>();
-  const navigate = useNavigate();
-
-  const logoutHandler = () => {
-    dispatch(authActions.logout());
-    navigate("/");
-  };
-
   const currentUser = useSelector((state: RootState) => state.auth.currentUser);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+
+  const [menuVisible, setMenuVisible] = useState(false);
 
   return (
     <>
-      <div className="flex items-center justify-center bg-zinc-700 p-3 pb-0">
-        <p className="text-amber-400 text-3xl font-bold">Training App</p>
-        <button
-          className="bg-amber-400 hover:bg-fuchsia-600 text-black font-bold  rounded-3xl transition-all absolute right-14 mt-4 p-1 pl-5 pr-5"
-          onClick={logoutHandler}
-        >
-          <p className="  font-bold cursor-pointe transition-al">Logout</p>
-        </button>
-      </div>
-      <div className="flex items-center justify-center bg-zinc-700">
-        <p className="text-amber-400 text-md font-bold">{currentUser}</p>
+      <div className="p-3 pb-0 cursor-default">
+        <div className="flex items-center justify-left md:justify-center">
+          <i className="fa-solid fa-dumbbell text-5xl text-[#F05454] pr-4" />
+          <p className="text-white text-4xl font-bold ">Training App</p>
+        </div>
+        {isAuthenticated && (
+          <>
+            {" "}
+            <button
+              className="absolute right-5 top-5 z-[2]"
+              onClick={() => {
+                setMenuVisible(!menuVisible);
+              }}
+            >
+              {menuVisible ? (
+                <i className="fa-solid fa-xmark text-white text-[2.5rem] hover:text-[#F05454] transition-all duration-200 active:rotate-180" />
+              ) : (
+                <i className="fa-solid fa-bars text-white text-4xl hover:text-[#F05454] transition-all duration-200 active:rotate-180" />
+              )}
+            </button>
+            {menuVisible && <Menu />}{" "}
+          </>
+        )}
       </div>
     </>
   );

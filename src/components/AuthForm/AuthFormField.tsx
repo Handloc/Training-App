@@ -30,8 +30,8 @@ const AuthFormField: React.FC<{
         type={type}
         id={id}
         className={`${
-          errors[id] ? "border-red-600" : "border-amber-400"
-        } border-b-2 bg-zinc-600 valid:bg-zinc-6010 focus:outline-none focus:border-fuchsia-600`}
+          errors[id] ? "border-red-600" : "border-[#F05454]"
+        } border-b-2 bg-[#2e3642] valid:bg-zinc-6010 focus:outline-none focus:border-white`}
         placeholder={field_name}
         {...register(id, {
           required: {

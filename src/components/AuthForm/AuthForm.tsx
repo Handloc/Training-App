@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import AuthFormField from "./AuthFormField";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import { ThunkDispatch } from "redux-thunk";
 import { addUser } from "../../store/users-slice";
@@ -164,7 +164,10 @@ const AuthForm: React.FC = () => {
           : "Create new account"}
       </p>
 
-      <button className="bg-[#F05454] hover:bg-[#30475E] hover:shadow-md text-white  mt-4 p-2 pl-8 pr-8 rounded-md transition-all duration-200">
+      <button
+        className="bg-[#F05454] hover:bg-[#30475E] hover:shadow-md text-white  mt-4 p-2 pl-8 pr-8 rounded-md transition-all duration-200"
+        type="submit"
+      >
         {registerAccount ? "Sign up " : "Sign in"}
       </button>
       {accountError && (

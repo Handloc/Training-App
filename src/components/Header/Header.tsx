@@ -10,6 +10,14 @@ const Header: React.FC<{}> = () => {
   );
 
   const [menuVisible, setMenuVisible] = useState(false);
+  const headerLinks = [
+    { linkName: "my profile", linkTo: "/profile" },
+    { linkName: "my workouts", linkTo: "/workout" },
+    { linkName: "exercises", linkTo: "/exercises" },
+    { linkName: "trainings", linkTo: "/trainings" },
+    { linkName: "nutrition", linkTo: "/nutrition" },
+    { linkName: "encyclopedia", linkTo: "/encyclopedia" },
+  ];
 
   return (
     <>
@@ -28,12 +36,12 @@ const Header: React.FC<{}> = () => {
               }}
             >
               {menuVisible ? (
-                <i className="fa-solid fa-xmark text-white text-[2.5rem] hover:text-[#F05454] transition-all duration-200 active:rotate-180" />
+                <i className="fa-solid fa-xmark text-white text-[2.5rem] hover:text-[#F05454] transition-all duration-200 active:rotate-45" />
               ) : (
-                <i className="fa-solid fa-bars text-white text-4xl hover:text-[#F05454] transition-all duration-200 active:rotate-180" />
+                <i className="fa-solid fa-bars text-white text-4xl hover:text-[#F05454] transition-all duration-200 active:rotate-45 " />
               )}
             </button>
-            {menuVisible && <Menu />}{" "}
+            {menuVisible && <Menu headerLinks={headerLinks} />}
           </>
         )}
       </div>

@@ -104,7 +104,7 @@ const AuthForm: React.FC = () => {
     <form
       data-netlify="true"
       onSubmit={handleSubmit(SubmitHandler)}
-      className="flex flex-col w-4/5 sm:w-3/5 md:w-2/5 lg:w-1/5 absolute top-40 left-0 right-0 m-auto items-center border-2 border-zinc-500 shadow-xl rounded-md p-5 bg-[#2e3642] text-white"
+      className="flex flex-col w-4/5 sm:w-3/5 md:w-2/5 lg:w-1/5 absolute top-60 left-0 right-0 m-auto items-center border-2 border-zinc-500 shadow-xl rounded-md p-5 bg-[#2e3642] text-white"
     >
       <AuthFormField
         field_name="E-mail"

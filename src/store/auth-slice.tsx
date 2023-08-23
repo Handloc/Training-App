@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialAuthState: { isAuthenticated: boolean; currentUser: string } = {
-  isAuthenticated: false,
-  currentUser: "",
+  isAuthenticated: localStorage.getItem("isAuthenticated") === "true",
+  currentUser: localStorage.getItem("currentUser") || "No user",
 };
 
 const authSlice = createSlice({
@@ -12,10 +12,14 @@ const authSlice = createSlice({
     login(state, action) {
       state.isAuthenticated = true;
       state.currentUser = action.payload;
+      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("currentUser", action.payload);
     },
     logout(state) {
       state.isAuthenticated = false;
       state.currentUser = "";
+      localStorage.removeItem("currentUser");
+      localStorage.removeItem("currentUser");
     },
   },
 });

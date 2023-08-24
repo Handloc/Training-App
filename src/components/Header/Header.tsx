@@ -22,7 +22,11 @@ const Header: React.FC<{}> = () => {
   return (
     <>
       <div className="p-3 pb-0 cursor-default">
-        <div className="flex items-center justify-left md:justify-center">
+        <div
+          className={`${
+            isAuthenticated ? "justify-left" : "justify-center"
+          } flex items-center md:justify-center`}
+        >
           <i className="fa-solid fa-dumbbell text-5xl text-[#F05454] pr-4" />
           <p className="text-white text-4xl font-bold ">Training App</p>
         </div>

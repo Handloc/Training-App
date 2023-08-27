@@ -14,7 +14,7 @@ const Menu: React.FC<{
           return (
             <NavLink
               to={link.linkTo}
-              className="pb-16 hover:text-[#F05454] transition-all duration-200"
+              className="py-10 hover:text-[#F05454] transition-all duration-200"
             >
               {link.linkName.toUpperCase()}
             </NavLink>

@@ -1,15 +1,20 @@
 import Header from "../components/Header/Header";
-import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import GraphButton from "../components/HomeSubPages/GraphButton";
 import InfoUpdateButton from "../components/HomeSubPages/InfoUpdateButton";
 import HomeModal from "../components/HomeModal/HomeModal";
+import { useDispatch, useSelector } from "react-redux";
+import { modalActions } from "../store/modal-slice";
 
 const HomePage: React.FC<{}> = () => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
-
+  const dispatch = useDispatch();
+  const weightModalVisible = useSelector(
+    (state: RootState) => state.modal.homeModalVisible
+  );
+  // const bodyModalVisible = useSelector((state) => state.modal.bodyIsVisible);
   if (isAuthenticated) {
     return (
       <>
@@ -27,7 +32,7 @@ const HomePage: React.FC<{}> = () => {
             <p>Waist: {} cm</p>
             <p>Tigh: {} cm</p>
           </div>
-          <HomeModal />
+          {weightModalVisible && <HomeModal />}
           <div className="flex mb-6">
             <InfoUpdateButton displayName="Update weight" />
             <InfoUpdateButton displayName="Update measurements" />

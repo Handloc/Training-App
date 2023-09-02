@@ -2,6 +2,8 @@ import Header from "../components/Header/Header";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import GraphButton from "../components/HomeSubPages/GraphButton";
+import InfoUpdateButton from "../components/HomeSubPages/InfoUpdateButton";
+import HomeModal from "../components/HomeModal/HomeModal";
 
 const HomePage: React.FC<{}> = () => {
   const isAuthenticated = useSelector(
@@ -12,11 +14,11 @@ const HomePage: React.FC<{}> = () => {
     return (
       <>
         <Header />
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col items-center">
           <div className="bg-slate-600 text-white text-lg mt-10 w-4/5 sm:w-3/5 md:w-2/5 lg:w-1/5 py-6 rounded-md transition-all duration-200 flex flex-col items-center justify-center">
             CURRENT TRAINING
           </div>
-          <div className="text-xl text-white">
+          <div className="text-xl text-white my-10">
             <p>Age: {}</p>
             <p>Height: {} cm</p>
             <p>Weight: {} cm</p>
@@ -24,6 +26,11 @@ const HomePage: React.FC<{}> = () => {
             <p>Chest: {} cm</p>
             <p>Waist: {} cm</p>
             <p>Tigh: {} cm</p>
+          </div>
+          <HomeModal />
+          <div className="flex mb-6">
+            <InfoUpdateButton displayName="Update weight" />
+            <InfoUpdateButton displayName="Update measurements" />
           </div>
           <div className="flex flex-col justify-around items-center">
             <GraphButton

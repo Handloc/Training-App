@@ -1,6 +1,7 @@
 import Header from "../components/Header/Header";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import GraphButton from "../components/HomeSubPages/GraphButton";
 
 const HomePage: React.FC<{}> = () => {
   const isAuthenticated = useSelector(
@@ -23,6 +24,20 @@ const HomePage: React.FC<{}> = () => {
             <p>Chest: {} cm</p>
             <p>Waist: {} cm</p>
             <p>Tigh: {} cm</p>
+          </div>
+          <div className="flex flex-col justify-around items-center">
+            <GraphButton
+              linkTo="/bmi_graph"
+              displayName="BMI graph"
+            ></GraphButton>
+            <GraphButton
+              linkTo="/weight_graph"
+              displayName="Weight graph"
+            ></GraphButton>
+            <GraphButton
+              linkTo="/body_graph"
+              displayName="Body measurements"
+            ></GraphButton>
           </div>
         </div>
       </>

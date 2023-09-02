@@ -14,10 +14,17 @@ const HomePage: React.FC<{}> = () => {
   const weightModalVisible = useSelector(
     (state: RootState) => state.modal.homeModalVisible
   );
-  // const bodyModalVisible = useSelector((state) => state.modal.bodyIsVisible);
   if (isAuthenticated) {
     return (
       <>
+        <div
+          className={`${
+            weightModalVisible ? "block" : "hidden"
+          } backdrop-blur-sm bg-[#0000004b] absolute w-full h-full z-[3]`}
+          onClick={() => {
+            dispatch(modalActions.hideHomePageModal());
+          }}
+        />
         <Header />
         <div className="flex flex-col items-center">
           <div className="bg-slate-600 text-white text-lg mt-10 w-4/5 sm:w-3/5 md:w-2/5 lg:w-1/5 py-6 rounded-md transition-all duration-200 flex flex-col items-center justify-center">

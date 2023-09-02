@@ -18,7 +18,7 @@ const AuthPage: React.FC<{}> = () => {
 
   return (
     <>
-      {isAuthenticated && (
+      {!isAuthenticated && (
         <>
           <Header />
           <AuthForm />

@@ -12,7 +12,7 @@ const HomePage: React.FC<{}> = () => {
       <>
         <Header />
         <div className="flex flex-col justify-center items-center">
-          <div className="bg-slate-600 text-white text-lg mt-10 w-4/5 py-10 rounded-md transition-all duration-200 flex flex-col items-center justify-center">
+          <div className="bg-slate-600 text-white text-lg mt-10 w-4/5 py-6 rounded-md transition-all duration-200 flex flex-col items-center justify-center">
             CURRENT TRAINING
           </div>
         </div>

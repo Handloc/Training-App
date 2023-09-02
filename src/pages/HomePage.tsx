@@ -12,8 +12,17 @@ const HomePage: React.FC<{}> = () => {
       <>
         <Header />
         <div className="flex flex-col justify-center items-center">
-          <div className="bg-slate-600 text-white text-lg mt-10 w-4/5 py-6 rounded-md transition-all duration-200 flex flex-col items-center justify-center">
+          <div className="bg-slate-600 text-white text-lg mt-10 w-4/5 sm:w-3/5 md:w-2/5 lg:w-1/5 py-6 rounded-md transition-all duration-200 flex flex-col items-center justify-center">
             CURRENT TRAINING
+          </div>
+          <div className="text-xl text-white">
+            <p>Age: {}</p>
+            <p>Height: {} cm</p>
+            <p>Weight: {} cm</p>
+            <p>Biceps: {} cm</p>
+            <p>Chest: {} cm</p>
+            <p>Waist: {} cm</p>
+            <p>Tigh: {} cm</p>
           </div>
         </div>
       </>

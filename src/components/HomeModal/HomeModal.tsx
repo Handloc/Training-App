@@ -19,7 +19,7 @@ const HomeModal: React.FC<{}> = ({}) => {
         }}
       />
 
-      <div className="flex flex-col h-full w-full justify-center items-center">
+      <form className="flex flex-col h-full w-full justify-center items-center">
         {currentModal === "Update weight" && (
           <ModalFormInput placeholder="New weight (kg)" />
         )}
@@ -34,7 +34,7 @@ const HomeModal: React.FC<{}> = ({}) => {
         <button className="bg-[#F05454] hover:bg-[#30475E] hover:shadow-md text-white rounded-md transition-all duration-200 text-lg mt-8  w-1/2 mx-4 p-2 text-center cursor-pointer ">
           Update
         </button>
-      </div>
+      </form>
     </div>
   );
 };

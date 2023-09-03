@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialModalState: { homeModalVisible: boolean } = {
+const initialModalState: { homeModalVisible: boolean; currentModal: string } = {
   homeModalVisible: false,
+  currentModal: "",
 };
 
 const modalSlice = createSlice({
@@ -13,6 +14,9 @@ const modalSlice = createSlice({
     },
     hideHomePageModal(state) {
       state.homeModalVisible = false;
+    },
+    setCurrentModal(state, actions) {
+      state.currentModal = actions.payload;
     },
   },
 });
